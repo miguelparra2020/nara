@@ -1,6 +1,12 @@
 import '../App.css';
 import { useEffect, useState } from 'react';
-import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption, MDBSpinner } from 'mdb-react-ui-kit';
+import { MDBCarousel, MDBCarouselItem,  MDBSpinner,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardImage
+ } from 'mdb-react-ui-kit';
 import '../App.css'; // Asegúrate de importar el archivo CSS si lo estás usando
 
 function Album() {
@@ -47,10 +53,22 @@ function Album() {
         <MDBCarousel showControls>
           {carouselItems.map((item, index) => (
             <MDBCarouselItem itemId={item.id} key={item['id'] || index}>
-              <img src={item['url publica']} className='d-block w-100 img-max-height' alt='...' />
-              <MDBCarouselCaption>
-                <h5>{item['descripcion'] || 'Descripción no disponible'}</h5>
-              </MDBCarouselCaption>
+              <div style={{display: 'flex', justifyContent: 'center'}}>
+      <MDBCard style={{maxWidth: '300px'}}>
+      <MDBCardImage src={item['url publica']} position='top' alt='...' 
+      width={180}
+      height={320}
+      />
+      <MDBCardBody>
+        <MDBCardText>
+          {item['fecha']}
+        </MDBCardText>
+      <MDBCardTitle>{item['descripcion']}</MDBCardTitle>
+        
+      </MDBCardBody>
+      
+    </MDBCard>
+    </div>
             </MDBCarouselItem>
           ))}
         </MDBCarousel>
