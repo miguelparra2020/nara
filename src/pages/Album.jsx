@@ -26,19 +26,26 @@ function Album() {
           `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`
         );
         const data = await response.json();
-
+        
         const headers = data.values[0];
         const rows = data.values.slice(1);
-        console.log(rows)
+        
+        // Organizar las filas por fecha (columna 2) desde la más reciente hasta la más antigua
+        rows.sort((a, b) => {
+          const dateA = new Date(a[1]); // Convierte la fecha de la fila A
+          const dateB = new Date(b[1]); // Convierte la fecha de la fila B
+          return dateB - dateA; // Ordena de más reciente a más antigua
+        });
         
         const formattedData = rows.map(row => {
           const entry = headers.reduce((obj, header, index) => {
             obj[header] = row[index] || '';
             return obj;
-          }, {})
-          entry.url = `https://www.appsheet.com/template/gettablefileurl?appName=nara-980448094&tableName=Sheet1&fileName=${entry.foto}`
-          return entry
-        })
+          }, {});
+          entry.url = `https://www.appsheet.com/template/gettablefileurl?appName=nara-980448094&tableName=Sheet1&fileName=${entry.foto}`;
+          return entry;
+        });
+        
 
         console.log("formattedData:", formattedData)
         setSheetData([...formattedData, ...formattedData, ...formattedData]);
