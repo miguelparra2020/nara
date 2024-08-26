@@ -29,15 +29,18 @@ function Album() {
 
         const headers = data.values[0];
         const rows = data.values.slice(1);
-
+        console.log(rows)
+        
         const formattedData = rows.map(row => {
           const entry = headers.reduce((obj, header, index) => {
             obj[header] = row[index] || '';
             return obj;
-          }, {});
-          return entry;
-        }).filter(entry => entry['url publica']);
+          }, {})
+          entry.url = `https://www.appsheet.com/template/gettablefileurl?appName=nara-980448094&tableName=Sheet1&fileName=${entry.foto}`
+          return entry
+        })
 
+        console.log("formattedData:", formattedData)
         setSheetData([...formattedData, ...formattedData, ...formattedData]);
         setLoading(false);
       } catch (error) {
@@ -48,6 +51,7 @@ function Album() {
 
     fetchSheetData();
   }, []);
+  console.log("sheetData:", sheetData)
 
   return (
     <>
@@ -61,11 +65,11 @@ function Album() {
       ) : (
         <MDBCarousel showControls dark>
           {sheetData.map((item, index) => (
-            <MDBCarouselItem itemId={index + 1} key={item['id'] || index}>
+            <MDBCarouselItem itemId={index + 1} key={index}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <MDBCard style={{ maxWidth: '350px' }}>
                   <MDBCardImage
-                    src={item['url publica']}
+                    src={item['url']}
                     position='top'
                     alt='...'
                     style={{ height: '60vh', objectFit: 'cover' }}
@@ -73,7 +77,7 @@ function Album() {
                   <MDBCardBody>
                     <MDBCardText>{item['fecha']}</MDBCardText>
                     <MDBCardTitle>{item['descripcion']}</MDBCardTitle>
-                    <MDBBtn href={item['url publica']} target='_blank' className="btn btn-danger">
+                    <MDBBtn href={item['url']} target='_blank' className="btn btn-danger">
                       Abrir foto &nbsp;&nbsp;
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
