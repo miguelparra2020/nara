@@ -1,6 +1,6 @@
 import '../App.css';
 import { useEffect, useState } from 'react';
-import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
+import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption, MDBSpinner } from 'mdb-react-ui-kit';
 import '../App.css'; // Asegúrate de importar el archivo CSS si lo estás usando
 
 function Album() {
@@ -55,7 +55,9 @@ function Album() {
           ))}
         </MDBCarousel>
       ) : (
-        <p>No hay datos para mostrar.</p>
+        <p><MDBSpinner role='status'>
+        <span className='visually-hidden'>Loading...</span>
+      </MDBSpinner> Cargando albúm ...</p>
       )}
     </>
   );
