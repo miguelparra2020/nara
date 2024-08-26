@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
+    "axios": "^1.7.5",
+    "file-saver": "^2.0.5",
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1"
+    "react-router-dom": "^6.26.1",
+    "tabletop": "^1.6.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
